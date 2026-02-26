@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}About - {{ parent() }}{% endblock %}
+
 {% block body %}
 <h2>About</h2>
 <section>
@@ -10,6 +12,25 @@
         <li>Hard-working</li>
         <li>Creative</li>
     </ul>
+    <section>
+        <h4>Design principles</h4>
+        <ul>
+            <li>
+                <strong>Accessibility:</strong> I strive to create inclusive and
+                accessible digital experiences that can be enjoyed by anyone.
+            </li>
+            <li>
+                <strong>Semantic code:</strong> I prioritize writing clean and
+                semantic code to ensure that my projects are well-structured and
+                easy to understand.
+            </li>
+            <li>
+                <strong>Documentation:</strong> I believe in the importance of
+                thorough documentation to facilitate collaboration and
+                maintainability of my projects.
+            </li>
+        </ul>
+    </section>
 </section>
 <section>
     <h3>Skills</h3>
@@ -42,9 +63,7 @@
 <section>
     <h3>Education</h3>
     <ul>
-        <li>
-            <h4>Bachelor's Degree in Digital Culture - University of Bergen</h4>
-        </li>
+        <li>Bachelor's Degree in Digital Culture - University of Bergen</li>
         <!-- TODO: Add a button to "View Course Summary" -->
     </ul>
 </section>

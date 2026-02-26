@@ -1,16 +1,52 @@
 # README
 
-This is a Symfony-based portfolio website project. It includes multiple pages such as Home, About, Projects, and Contact, with a consistent navigation bar across all pages.
+This is a Symfony-based portfolio website project. This portfolio is both a way
+for me to showcase my work and a platform to experiment with new web
+technologies.
 
-## Plans
+## Plans and ideas
 
-- Implement a contact form on the Contact page.
-- Add more detailed content to the About and Projects pages.
-- Enhance styling and responsiveness using CSS frameworks.
+### Pages
 
-### Ideas for future improvements
+- [ ] Home: An overview?
+- [ ] About: Who I am, what I know, how I learned it.
+- [ ] Projects: Overview of my projects, info about them, and links to them.
+- - [ ] Notes app (in progress)
+- - [ ] Digital Culture introduction/primer
+- - [ ] Calendar app
+- - [ ] Lore tracker
+- - [ ] Incremental game
+- - [ ] PokéDex
+- - [ ] Pokémon team builder
+- - [ ] Bottom-of-your-screen idle game
+- - [ ] Skyrim modlist visualizer
+- [ ] Contact: Link to GitHub, social media, and a contact form.
+- [ ] Now: Info about what I'm working on and if I'm looking for work.
 
+### Content
+
+- [ ] Find out what to add on the home page.
+- [ ] Implement a contact form on the Contact page.
+- [ ] Port some old projects to this page, so I have something to show.
+- [ ] Rewrite the about section to be better.
 - [ ] Add an [/now](https://sive.rs/nowff) page to share what I'm working on [I could even share it here?](https://nownownow.com/).
+- [ ] Consider adding a section on Digital Culture and why it's important to me.
+- [ ] If so, write a small introduction to Digital Culture.
+- [ ] Add a phoenix somewhere, for me.
+- [ ] Have a dropdown for different site themes.
+
+### Design
+
+- [ ] Digital space
+- [ ] Outer space
+- [ ] Windows 98
+- [ ] Dark mode
+- [ ] Garden
+- [ ] Winter
+- [ ] Night
+- [ ] Water
+- [ ] Glass
+- [ ] Paper
 
 ## References
 

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Notes App - {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/projects/notes_app.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('scripts/projects/notes_app.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+<h2>Notes app</h2>
+<!--
+This will be a simple note-taking app.
+Remember to keep it simple to start with! You can redo it with fun libraries and
+such later. Do it with JavaScript first.
+
+TODO:
+- [x] Start with one empty note.
+- [x] Save notes to local storage.
+- [x] Delete notes.
+- [x] Edit notes.
+- [ ] Allow submitting using shift + enter.
+- [ ] Implement Markdown
+- [ ] Keep multi-line breaks and such (maybe markdown helps with that too?).
+- [ ] Add functions for text decorations.
+- [ ] Improve the CSS (badly needed).
+
+CONSIDER:
+- [ ] Maybe have the notes on post-it notes, and drag them off to hang them up?
+- [ ] Design it with materiality in mind.
+
+-->
+<form id="notes-form" class="notes-form">
+    <textarea id="notes-input" class="notes-input"></textarea>
+    <button type="submit">Save</button>
+</form>
+<ul id="notes-list">
+</ul>
+{% endblock %}
