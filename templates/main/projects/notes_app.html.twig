@@ -24,7 +24,7 @@ TODO:
 - [x] Save notes to local storage.
 - [x] Delete notes.
 - [x] Edit notes.
-- [ ] Allow submitting using shift + enter.
+- [x] Allow submitting using shift + enter.
 - [ ] Implement Markdown
 - [ ] Keep multi-line breaks and such (maybe markdown helps with that too?).
 - [ ] Add functions for text decorations.
@@ -36,8 +36,22 @@ CONSIDER:
 
 -->
 <form id="notes-form" class="notes-form">
+    <div id="notes-controls">
+        <button id="notes-align-left" type="button" title="Align text left">
+            <span class="bi bi-text-left"></span>
+            <span class="visually-hidden">Align text left</span>
+        </button>
+        <button id="notes-align-center" type="button" title="Center text" onClick="textAlignCenter()">
+            <span class="bi bi-text-center"></span>
+            <span class="visually-hidden">Center text</span>
+        </button>
+        <button id="notes-align-right" type="button" title="Align text right">
+            <span class="bi bi-text-right"></span>
+            <span class="visually-hidden">Align text right</span>
+        </button>
+    </div>
     <textarea id="notes-input" class="notes-input"></textarea>
-    <button type="submit">Save</button>
+    <button type="submit" class="btn btn-primary">Save</button>
 </form>
 <ul id="notes-list">
 </ul>

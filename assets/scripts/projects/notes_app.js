@@ -7,7 +7,9 @@ console.log("Notes app script loaded");
  * It handles the functionality for creating, displaying and saving notes.
  */
 
-// TODO: Make a note object to simplify interacting with it.
+// BUG: Notes disappear when arriving from a different page (How/where does the Note class get redeclared?).
+// Error given: "Uncaught SyntaxError: redeclaration of let Note"
+
 class Note {
     constructor(id, content, date) {
         this.id = id;
@@ -69,14 +71,14 @@ function saveNote(text) {
     if (!localStorage.getItem("notes")) {
         // There is no notes
         console.log("[Saving]: Saving first note to local storage.");
-        const note = new Note(1, text, new Date().toISOString());
-        localStorage.setItem("notes", JSON.stringify([note]));
+        const newNote = new Note(1, text, new Date().toISOString());
+        localStorage.setItem("notes", JSON.stringify([newNote]));
 
         // Start counting notes
         localStorage.setItem("noteCount", 1);
 
         // Render the new note
-        renderNote(note);
+        renderNote(newNote);
     } else {
         // There is notes
         console.log("[Saving]: Saving additional note to local storage.");
@@ -86,16 +88,16 @@ function saveNote(text) {
         noteCount = parseInt(noteCount) + 1;
 
         // Create a new Note
-        const note = new Note(noteCount, text, new Date().toISOString());
+        const newNote = new Note(noteCount, text, new Date().toISOString());
         const notes = JSON.parse(localStorage.getItem("notes"));
-        notes.push(note);
+        notes.push(newNote);
 
         // Save to local storage
         localStorage.setItem("notes", JSON.stringify(notes));
         localStorage.setItem("noteCount", noteCount);
 
         // Render the new note
-        renderNote(note);
+        renderNote(newNote);
     }
 }
 
@@ -124,8 +126,8 @@ function deleteNote(id) {
 }
 
 function editNote(id) {
-    const note = document.querySelector(`.note-item[data-id="${id}"]`);
-    if (note) {
+    const noteToEdit = document.querySelector(`.note-item[data-id="${id}"]`);
+    if (noteToEdit) {
         // Get the note data
         const notes = JSON.parse(localStorage.getItem("notes"));
         const noteData = notes.find(note => note.id === id);
@@ -133,7 +135,7 @@ function editNote(id) {
         // Base form
         const form = document.createElement("form");
         form.classList.add("notes-form");
-        note.replaceWith(form);
+        noteToEdit.replaceWith(form);
 
         // Text area
         const textarea = document.createElement("textarea");
@@ -155,23 +157,24 @@ function editNote(id) {
                 // Changes made, save the content
                 noteData.content = updatedText;
                 localStorage.setItem("notes", JSON.stringify(notes));
-                form.replaceWith(note);
+                form.replaceWith(noteToEdit);
                 
                 // Update text in note to reflect changes
-                note.querySelector("p").textContent = updatedText;
+                noteToEdit.querySelector("p").textContent = updatedText;
             } else if (updatedText !== "" && updatedText === noteData.content) {
                 // No changes made
                 console.log("[Edit]: No changes made for note with ID " + id + ", reverting to original note.");
-                form.replaceWith(note);
+                form.replaceWith(noteToEdit);
             }
-        })
+        });
         cancelButton.textContent = "Cancel";
         cancelButton.classList.add("btn", "btn-secondary");
         cancelButton.addEventListener("click", function(event) {
             // Revert changes
             event.preventDefault();
-            form.replaceWith(note);
-        })
+            form.replaceWith(noteToEdit);
+            console.log("[Edit]: Edit canceled for note with ID " + id + ", reverting to original note.");
+        });
 
         controlPanel.appendChild(submitButton);
         controlPanel.appendChild(cancelButton);
@@ -183,19 +186,52 @@ function editNote(id) {
     }
 }
 
+function submitNote() {
+    const notesInput = document.getElementById("notes-input");
+    const noteText = notesInput.value.trim();
+    if (noteText !== "") {
+        saveNote(noteText);
+        notesInput.value = "";
+    }
+}
+
+function textAlignCenter() {
+    const textarea = document.getElementById("notes-input");
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    let x = textarea.value;
+
+    // TODO: Turn this into an utility function to use other places too
+    if (start == end) {
+        // Fill at the pointer location
+        let input = "[center][/center]";
+        let newInput = x.slice(0, start) + input + x.slice(end);
+        textarea.value = newInput;
+    } else {
+        // Fill around highlighted text
+        let inputStart = "[center]";
+        let inputEnd = "[/center]";
+        let newInput = x.slice(0, start) + inputStart + x.slice(start, end) + inputEnd + x.slice(end);
+        textarea.value = newInput;
+    }
+}
+
 // Initialize the app
 window.onload = function() {
     // Load notes from local storage
     loadNotes();
 
-    // Add the submit event listener
+    // Add the shift + enter event submit
+    document.getElementById("notes-input").addEventListener("keydown", function(event) {
+        if (event.key === "Enter" && event.shiftKey) {
+            event.preventDefault();
+            submitNote();
+        }
+    })
+
+    // Add the default submit event listener
     document.getElementById("notes-form").addEventListener("submit", function(event) {
         event.preventDefault();
-        const notesInput = document.getElementById("notes-input");
-        const noteText = notesInput.value.trim();
-        if (noteText !== "") {
-            saveNote(noteText);
-            notesInput.value = "";
-        };
+        submitNote();
     });
 }
