@@ -195,22 +195,23 @@ function submitNote() {
     }
 }
 
-function textAlignCenter() {
+function inputBBCode(tag) {
+    // TODO: Add a start parameter for stuff like urls.
+
     const textarea = document.getElementById("notes-input");
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     let x = textarea.value;
 
-    // TODO: Turn this into an utility function to use other places too
     if (start == end) {
         // Fill at the pointer location
-        let input = "[center][/center]";
+        let input = `[${tag}][/${tag}]`;
         let newInput = x.slice(0, start) + input + x.slice(end);
         textarea.value = newInput;
     } else {
         // Fill around highlighted text
-        let inputStart = "[center]";
-        let inputEnd = "[/center]";
+        let inputStart = `[${tag}]`;
+        let inputEnd = `[/${tag}]`;
         let newInput = x.slice(0, start) + inputStart + x.slice(start, end) + inputEnd + x.slice(end);
         textarea.value = newInput;
     }

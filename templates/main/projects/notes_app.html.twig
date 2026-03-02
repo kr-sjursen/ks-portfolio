@@ -29,6 +29,8 @@ TODO:
 - [ ] Keep multi-line breaks and such (maybe markdown helps with that too?).
 - [ ] Add functions for text decorations.
 - [ ] Improve the CSS (badly needed).
+- [ ] Preview formatting function.
+- [ ] Add checkmarks that can be updated
 
 CONSIDER:
 - [ ] Maybe have the notes on post-it notes, and drag them off to hang them up?
@@ -36,19 +38,63 @@ CONSIDER:
 
 -->
 <form id="notes-form" class="notes-form">
-    <div id="notes-controls">
-        <button id="notes-align-left" type="button" title="Align text left">
+    <div id="notes-controls" class="btn-group" role="group" aria-label="Text formatting controls">
+        <button id="notes-type-bold" class="btn btn-secondary" type="button" title="Bold" onClick="inputBBCode('b')">
+            <span class="bi bi-type-bold"></span>
+            <span class="visually-hidden">Bold</span>
+        </button>
+        <button id="notes-type-italic" class="btn btn-secondary" type="button" title="Italic" onClick="inputBBCode('i')">
+            <span class="bi bi-type-italic"></span>
+            <span class="visually-hidden">Italic </span>
+        </button>
+        <button id="notes-type-underline" class="btn btn-secondary" type="button" title="Underline" onClick="inputBBCode('u')">
+            <span class="bi bi-type-underline"></span>
+            <span class="visually-hidden">Underline</span>
+        </button>
+        <button id="notes-indent-left" class="btn btn-secondary" type="button" title="Indent left" onClick="inputBBCode('indent-left')">
+            <span class="bi bi-text-indent-left"></span>
+            <span class="visually-hidden">Indent left</span>
+        </button>
+        <button id="notes-indent-right" class="btn btn-secondary" type="button" title="Indent right" onClick="inputBBCode('indent-right')">
+            <span class="bi bi-text-indent-right"></span>
+            <span class="visually-hidden">Indent right</span>
+        </button>
+        <button id="notes-align-left" class="btn btn-secondary" type="button" title="Align left" onClick="inputBBCode('left')">
             <span class="bi bi-text-left"></span>
-            <span class="visually-hidden">Align text left</span>
+            <span class="visually-hidden">Align left</span>
         </button>
-        <button id="notes-align-center" type="button" title="Center text" onClick="textAlignCenter()">
+        <button id="notes-align-center" class="btn btn-secondary" type="button" title="Align center" onClick="inputBBCode('center')">
             <span class="bi bi-text-center"></span>
-            <span class="visually-hidden">Center text</span>
+            <span class="visually-hidden">Align center</span>
         </button>
-        <button id="notes-align-right" type="button" title="Align text right">
+        <button id="notes-align-right" class="btn btn-secondary" type="button" title="Align right" onClick="inputBBCode('right')">
             <span class="bi bi-text-right"></span>
-            <span class="visually-hidden">Align text right</span>
+            <span class="visually-hidden">Align right</span>
         </button>
+        <button id="notes-insert-link" class="btn btn-secondary" type="button" title="Insert link" onClick="inputBBCode('url')">
+            <!-- TODO: Open a image URL input dialog -->
+            <span class="bi bi-link"></span>
+            <span class="visually-hidden">Insert link</span>
+        </button>
+        <button id="notes-insert-img" class="btn btn-secondary" type="button" title="Insert image" onClick="inputBBCode('img')">
+            <!-- TODO: Open a URL input dialog -->
+            <span class="bi bi-card-image"></span>
+            <span class="visually-hidden">Insert image</span>
+        </button>
+        <!-- TODO: Icons -->
+        <button id="notes-inset-ordered-list" class="btn btn-secondary" type="button" title="Insert ordered list" onClick="inputBBCode('ordered-list')">
+            <span class="bi bi-list-ol"></span>
+            <span class="visually-hidden">Insert ordered list</span>
+        </button>
+        <!-- TODO: Unordered list -->
+        <button id="notes-insert-unordered-list" class="btn btn-secondary" type="button" title="Insert unordered list" onClick="inputBBCode('unordered-list')">
+            <span class="bi bi-list-ul"></span>
+            <span class="visually-hidden">Insert unordered list</span>
+        </button>
+        <!-- TODO: Quote text -->
+        <!-- TODO: Code block -->
+        <!-- TODO: Strikethrough text -->
+        <!-- TODO: Checkmark -->
     </div>
     <textarea id="notes-input" class="notes-input"></textarea>
     <button type="submit" class="btn btn-primary">Save</button>
