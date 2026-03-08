@@ -11,7 +11,7 @@ technologies.
 - [ ] Home: An overview?
 - [ ] About: Who I am, what I know, how I learned it.
 - [ ] Projects: Overview of my projects, info about them, and links to them.
-- - [ ] Notes app (in progress)
+- - [x] Notes app (basic functionality OK)
 - - [ ] Digital Culture introduction/primer
 - - [ ] Calendar app
 - - [ ] Lore tracker

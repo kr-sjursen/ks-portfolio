@@ -1,0 +1,21 @@
+#pokedex {
+    border: 1px solid black;
+    display: flex;
+    flex-flow: row nowrap;
+    min-height: 65vh;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#pokemonInfo {
+    border: 1px solid black;
+    height: 100%;
+    order: -1;
+    width: 100%;
+}
+
+#pokedexNav {
+    border: 1px solid black;
+    max-width: 25%;
+    overflow-y: scroll;
+}

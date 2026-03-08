@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PokéDex - {{ parent() }}{% endblock %}
+
+{#
+Notes:
+- [ ] Checkboxes to track living dex?
+- [ ] Different checkboxes to track shiny living dex?
+- [ ] Save progress to localstorage.
+- [ ] Dex collection statistics.
+- [ ] As much information as possible.
+- [ ] Language toggle
+- [ ] Search bar
+- [ ] Toggle secondary navigation visibility.
+#}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/projects/pokedex.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<h2>PokéDex</h2>
+<div id="pokedex">
+    <nav id="pokedexNav" aria-label="Pokédex navigation">
+        <h3>Pokédex Overview</h3>
+        <ul id="pokeList">
+        {% for pokemon in pokemonList %}
+            <li class="pokeListItem">
+                <a href="#{{ pokemon.id}}">
+                    <span class="pokemonId">{{ '%04d'|format(pokemon.id) }}</span>: <span class="pokemonName">{{ pokemon.name|capitalize }}</span>
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+    </nav>
+    <section id="pokemonInfo" class="container">
+        <h3>{{ displayPokemon.name|capitalize}}</h3>
+        {# TODO: Add pokemon categories (e.g. Seed Pokémon) #}
+        <!--<p>Title Pokémon</p>-->
+
+        <img id="pokemonSprite" src="{{ displayPokemon.sprites.front_default }}" alt="{{ displayPokemon.name|capitalize }} sprite"></img>
+        <audio controls src="{{ displayPokemon.cries.latest }}"></audio>
+
+        <ul>
+            <li>Height: {{ displayPokemon.height / 10 }} m</li>
+            <li>Weight: {{ displayPokemon.weight / 10 }} kg</li>
+        </ul>
+
+        <section>
+            <h4>Types</h4>
+            <ul>
+            {% for type in displayPokemon.types %}
+                <li>
+                    {{ type.type.name|capitalize }}
+                </li>
+            {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            <h4>Abilities</h4>
+            <ul>
+            {% for ability in displayPokemon.abilities %}
+                <li>
+                    {{ ability.ability.name|capitalize }}
+                    {% if ability.is_hidden %}
+                        (Hidden)
+                    {% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+        </section>
+        <section>
+            <h4>Moves</h4>
+            <ul>
+            {% for moves in displayPokemon.moves %}
+                {% if moves.version_group_details.0.move_learn_method.name == 'level-up' %}
+                {# TODO: Sort by lowest level first #}
+                <li>
+                    Level {{ moves.version_group_details.0.level_learned_at }}:
+                    {{ moves.move.name|capitalize }}
+                </li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </section>
+    </section>
+</div>
+{% endblock %}
